@@ -16,6 +16,10 @@ init.push(webserver.listen(8000));
 init.push(new Promise(function(resolve, reject) {
   app.on('ready',resolve);
 }))
+
+webserver.on("launch",function(key){
+  console.log("launching : ",key);
+})
 Promise.all(init).then(function() {
   var size = electron.screen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
