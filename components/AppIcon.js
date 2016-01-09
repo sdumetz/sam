@@ -15,13 +15,16 @@ const AppIcon = React.createClass({
     image.src = source;
   },
   render() {
-    var style = {
-      width:"100px",
-      height:"100px"
+    var imgStyle = {
+      backgroundImage:"url(\""+this.state.src+"\")",
+      backgroundRepeat:"no-repeat",
+      backgroundPosition:"center",
+      backgroundSize:"auto 150px",
+      width: "100%",
+      height: "150px"
     }
     return (
-      <div className='icon'>
-        <img style={style} src={this.state.src}></img>
+      <div style={imgStyle} className='icon'>
       </div>
     );
   }

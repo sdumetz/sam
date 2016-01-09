@@ -13,7 +13,9 @@ const ListView = React.createClass({
   },
   render() {
     var divStyle= {
-      display:"flex"
+      display:"flex",
+      "maxWidth":"1200px",
+      padding: "50px"
     }
     var appviews = Object.keys(this.state.apps).filter((appname)=>{
       return ((
@@ -22,13 +24,11 @@ const ListView = React.createClass({
       )? true : false)
     }).map((appname)=>{
       var entry = this.state.apps[appname]["Desktop Entry"]
-      return(<AppView key={appname} entry={entry} name={entry.Name}/>)
+      return(<AppView key={appname} entry={entry}/>)
     });
       return (
         <div>
-          <h3> Available apps </h3>
           <div style={divStyle} className='list'>
-
               {appviews}
           </div>
         </div>

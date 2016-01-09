@@ -1,5 +1,6 @@
 const React = require('react');
 const AppIcon = require("./AppIcon")
+const AppTitle = require("./AppTitle")
 const XhrMixin = require("./mixins/XhrMixin");
 const AppView = React.createClass({
   mixins: [XhrMixin],
@@ -8,12 +9,13 @@ const AppView = React.createClass({
  },
   render() {
     var divStyle={
-      width:"33%"
+      width:"33%",
+      cursor:"pointer"
     }
     return (
-      <div style={divStyle} className='app' onClick={this.handleClick}>
-        <h3>{this.props.name}</h3>
+      <div style={divStyle} className='appview' onClick={this.handleClick}>
         <AppIcon entry={this.props.entry} />
+        <AppTitle entry={this.props.entry}/>
       </div>
     );
   }

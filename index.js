@@ -16,13 +16,18 @@ init.push(new Promise(function(resolve, reject) {
   app.on('ready',resolve);
 }))
 
-webserver.on("launch",function(key){
-  console.log("launching : ",key);
+webserver.on("start",function(key){
+  console.log("starting : ",key)
+  mainWindow.hide();
+})
+webserver.on("end",function(){
+  console.log("End of app");
+  mainWindow.show();
 })
 Promise.all(init).then(function() {
   var size = electron.screen.getPrimaryDisplay().workAreaSize;
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: size.width, height: size.height});
+  mainWindow = new BrowserWindow({width: size.width, height: size.height,frame:false});
 
   // and load the index.html of the app.
   mainWindow.loadURL('http://localhost:8000/');
