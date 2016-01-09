@@ -8,6 +8,9 @@ const AppView = React.createClass({
       height:"150px",
       textAlign:"center"
     }
+    if(this.props.active){
+      divStyle.opacity="0.8";
+    }
     return (
       <div style={divStyle} className='apptitle' onClick={this.handleClick}>
         <h3>{this.props.entry["Name"]}</h3>

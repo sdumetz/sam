@@ -12,10 +12,13 @@ const AppView = React.createClass({
       width:"33%",
       cursor:"pointer"
     }
+    if(this.props.active){
+      divStyle.backgroundColor = "black";
+    }
     return (
       <div style={divStyle} className='appview' onClick={this.handleClick}>
-        <AppIcon entry={this.props.entry} />
-        <AppTitle entry={this.props.entry}/>
+        <AppIcon {...this.props}/>
+        <AppTitle {...this.props}/>
       </div>
     );
   }

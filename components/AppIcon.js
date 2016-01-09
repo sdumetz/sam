@@ -16,12 +16,16 @@ const AppIcon = React.createClass({
   },
   render() {
     var imgStyle = {
+      backgroundColor:"white",
       backgroundImage:"url(\""+this.state.src+"\")",
       backgroundRepeat:"no-repeat",
       backgroundPosition:"center",
       backgroundSize:"auto 150px",
       width: "100%",
       height: "150px"
+    }
+    if(this.props.active){
+      imgStyle.opacity = "0.8";
     }
     return (
       <div style={imgStyle} className='icon'>
