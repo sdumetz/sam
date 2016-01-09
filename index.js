@@ -10,7 +10,6 @@ var mainWindow = null; // Keep a global reference of the window object
 
 
 var webserver = new WebServer();
-webserver.app.use(express.static(__dirname + '/static'));
 var init = [];
 init.push(webserver.listen(8000));
 init.push(new Promise(function(resolve, reject) {
