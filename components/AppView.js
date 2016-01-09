@@ -3,10 +3,7 @@ const AppIcon = require("./AppIcon")
 const AppTitle = require("./AppTitle")
 const XhrMixin = require("./mixins/XhrMixin");
 const AppView = React.createClass({
-  mixins: [XhrMixin],
-  handleClick: function() {
-    this.postApp(this.props.entry["Exec"]).then(function(res){console.log(this.props.name,"sucessfully posted")},function(e){console.error(e.stack)})
- },
+
   render() {
     var divStyle={
       width:"33%",
@@ -16,7 +13,7 @@ const AppView = React.createClass({
       divStyle.backgroundColor = "black";
     }
     return (
-      <div style={divStyle} className='appview' onClick={this.handleClick}>
+      <div style={divStyle} className='appview' onClick={this.props.onClick}>
         <AppIcon {...this.props}/>
         <AppTitle {...this.props}/>
       </div>

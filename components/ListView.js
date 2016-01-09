@@ -3,6 +3,9 @@ const AppView = require("./AppView");
 const XhrMixin = require("./mixins/XhrMixin");
 const ListView = React.createClass({
   mixins: [XhrMixin],
+  handleClick: function(i) {
+    this.postApp(this._getApps()[i]["Exec"]).then(function(res){console.log(this.props.name,"sucessfully posted")},function(e){console.error(e.stack)})
+  },
   getInitialState() {
       return {apps:{},select:-1};//select init to -1 : no selection until a key is pressed
   },
@@ -11,16 +14,29 @@ const ListView = React.createClass({
       this.setState({apps:res});
     },function(e){console.error(e.stack)});
     document.onkeydown = (evt)=> {
+      var apps = this._getApps();
       evt = evt || window.event;
-      if (evt.keyCode == 37) {
-        this.setState({select:((this.state.select-1<0)? Object.keys(this.state.apps).length-1 : this.state.select-1)});
+      if (evt.keyCode == 13 && apps[this.state.select]){
+        this.handleClick(this.state.select);
+      }else if(evt.keyCode == 37) {
+        this.setState({select:((this.state.select-1<0)? apps.length-1 : this.state.select-1)});
       }else if(evt.keyCode == 39){
-        this.setState({select:((this.state.select+1>Object.keys(this.state.apps).length-1)? 0 : this.state.select+1)});
+        this.setState({select:((this.state.select+1>apps.length-1)? 0 : this.state.select+1)});
       }else{
         console.log(evt.keyCode);
       }
     };
 
+  },
+  _getApps(){
+    return Object.keys(this.state.apps).filter((appname)=>{
+      return ((
+        typeof this.state.apps[appname]["Desktop Entry"] === "object"
+        && typeof this.state.apps[appname]["Desktop Entry"]["Name"] === "string"
+      )? true : false)
+    }).map((appname)=>{
+      return this.state.apps[appname]["Desktop Entry"];
+    })
   },
   render() {
     var divStyle= {
@@ -28,14 +44,8 @@ const ListView = React.createClass({
       "maxWidth":"1200px",
       padding: "50px"
     }
-    var appviews = Object.keys(this.state.apps).filter((appname)=>{
-      return ((
-        typeof this.state.apps[appname]["Desktop Entry"] === "object"
-        && typeof this.state.apps[appname]["Desktop Entry"]["Name"] === "string"
-      )? true : false)
-    }).map((appname,index,apps)=>{
-      var entry = this.state.apps[appname]["Desktop Entry"]
-      return(<AppView key={appname} entry={entry} active={this.state.select == index}/>)
+    var appviews = this._getApps().map((entry,index,apps)=>{
+      return(<AppView key={index} entry={entry} active={this.state.select == index} onClick={this.handleClick.bind(this,index)}/>)
     });
       return (
         <div>
