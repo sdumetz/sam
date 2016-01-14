@@ -4,7 +4,10 @@ const XhrMixin = require("./mixins/XhrMixin");
 const ListView = React.createClass({
   mixins: [XhrMixin],
   handleClick: function(i) {
-    this.postApp(this._getApps()[i]["Exec"]).then(function(res){console.log(this.props.name,"sucessfully posted")},function(e){console.error(e.stack)})
+    var apps = this._getApps();
+    if(!apps || !apps[i]) return;
+    console.log("handling click on : ",i);
+    this.postApp(apps[i]["Exec"]).catch(function(e){console.error(e.stack)})
   },
   getInitialState() {
       return {apps:{},select:-1};//select init to -1 : no selection until a key is pressed
@@ -13,7 +16,7 @@ const ListView = React.createClass({
     this.getJSON("/list").then((res)=>{
       this.setState({apps:res});
     },function(e){console.error(e.stack)});
-    document.onkeydown = (evt)=> {
+    window.onkeydown = (evt)=> {
       var apps = this._getApps();
       evt = evt || window.event;
       if (evt.keyCode == 13 && apps[this.state.select]){

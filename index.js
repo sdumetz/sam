@@ -43,6 +43,9 @@ Promise.all(init).then(function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+  mainWindow.on('keypress', function(date) {
+    console.log("keypress",data);
+  });
 }).catch(function(e){
   process.nextTick(function(){
     throw e;
