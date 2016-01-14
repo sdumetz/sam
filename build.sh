@@ -2,6 +2,7 @@
 set -e
 TMP=$(mktemp -d)
 echo "building JS files"
+mkdir -p build
 npm run browserify
 echo "building electron app"
 electron-packager . ${npm_package_name} --platform=linux --arch=x64 --version=0.36.3 --asar=true --overwrite=true --prune=true  \
@@ -42,6 +43,15 @@ dpkg-deb --build $TMP "${npm_package_name}_${npm_package_version}.deb"
 echo "deleting build dir"
 rm -rf $TMP
 
-git config user.name "$GIT_NAME"
-git config user.email "$GIT_EMAIL"
-git checkout -B gh-pages
+#git config user.name "$GIT_NAME"
+#git config user.email "$GIT_EMAIL"
+#git checkout gh-pages
+#git rm -f --cached build/*
+#mv "${npm_package_name}_${npm_package_version}.deb" build/
+
+#dpkg-scanpackages build > build/Packages
+#cat Packages| gzip -9c > build/Packages.gz
+
+
+#git add "build/${npm_package_name}_${npm_package_version}.deb" Packages Packages.gz
+#git commit -m ""
