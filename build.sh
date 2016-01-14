@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 TMP=$(mktemp -d)
 echo "building JS files"
 npm run browserify
@@ -37,3 +38,10 @@ _EOF_
 chmod +x $TMP/usr/bin/sam
 echo "building deb file"
 dpkg-deb --build $TMP "${npm_package_name}_${npm_package_version}.deb"
+
+echo "deleting build dir"
+rm -rf $TMP
+
+git config user.name "$GIT_NAME"
+git config user.email "$GIT_EMAIL"
+git checkout -B gh-pages
