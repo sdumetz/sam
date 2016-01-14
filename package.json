@@ -1,14 +1,15 @@
 {
   "name": "sam",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "smart TV application manager",
   "main": "index.js",
-  "config":{"build_dir":"/tmp"},
+  "config": {
+    "build_dir": "/tmp"
+  },
   "scripts": {
     "start": "NODE_ENV=development electron index.js",
     "browserify": "browserify -d -t [ babelify --presets [ es2015 react ] ] components/index.js -o build/bundle.js",
     "build": "./build.sh",
-
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
