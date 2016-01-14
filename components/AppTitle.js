@@ -1,6 +1,5 @@
 const React = require('react');
 const AppIcon = require("./AppIcon")
-const XhrMixin = require("./mixins/XhrMixin");
 const AppView = React.createClass({
 
   render() {

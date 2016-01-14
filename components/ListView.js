@@ -1,6 +1,7 @@
 const React = require('react');
 const AppView = require("./AppView");
 const XhrMixin = require("./mixins/XhrMixin");
+
 const ListView = React.createClass({
   mixins: [XhrMixin],
   handleClick: function(i) {

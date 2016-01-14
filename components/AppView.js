@@ -1,7 +1,6 @@
 const React = require('react');
 const AppIcon = require("./AppIcon")
 const AppTitle = require("./AppTitle")
-const XhrMixin = require("./mixins/XhrMixin");
 const AppView = React.createClass({
   render() {
     var divStyle={
