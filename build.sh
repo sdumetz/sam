@@ -6,7 +6,7 @@ mkdir -p build
 npm run browserify
 echo "building electron app"
 electron-packager . ${npm_package_name} --platform=linux --arch=x64 --version=0.36.3 --asar=true --overwrite=true --prune=true  \
-  --ignore="node_modules/(electron-packager|electron-prebuilt|.bin)|components/*"
+  --ignore="node_modules/(electron-packager|electron-prebuilt|\.bin)|components|.*\.deb"
 
 echo "creating destination structure in $TMP"
 mkdir -p $TMP/usr/bin
@@ -54,4 +54,3 @@ rm -rf $TMP
 
 
 #git add "build/${npm_package_name}_${npm_package_version}.deb" Packages Packages.gz
-#git commit -m ""
