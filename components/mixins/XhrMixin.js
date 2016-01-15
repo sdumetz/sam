@@ -8,6 +8,9 @@ module.exports = {
   postApp:function(name){
     return this.xhr("/app/"+encodeURIComponent(name),"POST");
   },
+  postUrl:function(name){
+    return this.xhr("/url/"+encodeURIComponent(name),"POST");
+  },
   xhr: function (url,method){
     console.log("sending XHR for : ",url)
     return new Promise(function(resolve, reject) {

@@ -6,9 +6,12 @@ const ListView = React.createClass({
   mixins: [XhrMixin],
   handleClick: function(i) {
     var apps = this._getApps();
-    if(!apps || !apps[i]) return;
     console.log("handling click on : ",i);
-    this.postApp(apps[i]["Exec"]).catch(function(e){console.error(e.stack)})
+    if(apps[i] && apps[i]["Exec"]){
+      return this.postApp(apps[i]["Exec"]).catch(function(e){console.error(e.stack)})
+    }else{
+
+    }
   },
   getInitialState() {
       return {apps:{},select:-1};//select init to -1 : no selection until a key is pressed
@@ -51,13 +54,13 @@ const ListView = React.createClass({
     var appviews = this._getApps().map((entry,index,apps)=>{
       return(<AppView key={index} entry={entry} active={this.state.select == index} onClick={this.handleClick.bind(this,index)}/>)
     });
-      return (
-        <div>
-          <div style={divStyle} className='list'>
-              {appviews}
-          </div>
+    return (
+      <div>
+        <div style={divStyle} className='list'>
+          {appviews}
         </div>
-      );
+      </div>
+    );
   }
 });
 module.exports = ListView;
