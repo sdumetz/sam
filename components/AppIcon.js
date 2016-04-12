@@ -1,10 +1,14 @@
-const React = require('react');
-const AppIcon = React.createClass({
-  getInitialState(){
-    return {src:"/img/default_icon.png"};
-  },
+import React from 'react';
+export default class AppIcon extends React.Component{
+  constructor(props){
+    super(props)
+    this.state={src:"/img/default_icon.png"}
+  }
   componentDidMount(){
-    var source = "/icon?path="+encodeURIComponent(this.props.entry["Icon"]||"/img/default_icon.png");
+    if(this.props.source){
+      return this.setState({src:this.props.source});
+    }
+    var source = "/icon?path="+encodeURIComponent(this.props.file||"/img/default_icon.png");
     var image = new Image();
     image.onload = ()=>{
       this.setState({src:source});
@@ -13,7 +17,7 @@ const AppIcon = React.createClass({
       console.warn("cannot find : ",source);
     }
     image.src = source;
-  },
+  }
   render() {
     var imgStyle = {
       backgroundColor:"white",
@@ -32,5 +36,4 @@ const AppIcon = React.createClass({
       </div>
     );
   }
-});
-module.exports = AppIcon;
+};
