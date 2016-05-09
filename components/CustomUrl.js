@@ -12,13 +12,6 @@ export default class CustomUrl extends React.Component{
     this.setFocus();
   }
   setFocus(){
-    console.log("did mount : ",this.props)
-    if(this.props.active){
-      console.log("set input focus")
-      ReactDOM.findDOMNode(this.refs.input).focus();
-    }else{
-      ReactDOM.findDOMNode(this.refs.input).blur();
-    }
   }
   handleChange(event){
     this.setState({url: event.target.value});

@@ -19682,7 +19682,7 @@
 	
 	var _GotoView2 = _interopRequireDefault(_GotoView);
 	
-	var _XhrMixin = __webpack_require__(163);
+	var _XhrMixin = __webpack_require__(165);
 	
 	var _XhrMixin2 = _interopRequireDefault(_XhrMixin);
 	
@@ -20032,7 +20032,7 @@
 	
 	var _AppTitle2 = _interopRequireDefault(_AppTitle);
 	
-	var _CustomUrl = __webpack_require__(165);
+	var _CustomUrl = __webpack_require__(163);
 	
 	var _CustomUrl2 = _interopRequireDefault(_CustomUrl);
 	
@@ -20085,53 +20085,6 @@
 
 /***/ },
 /* 163 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	module.exports = {
-	  getJSON: function getJSON(url) {
-	    return this.xhr(url, "GET").then(JSON.parse);
-	  },
-	  getIcon: function getIcon(path) {
-	    return this.xhr("/icon?path=" + path, "GET");
-	  },
-	  postApp: function postApp(name) {
-	    return this.xhr("/app/" + encodeURIComponent(name), "POST");
-	  },
-	  postUrl: function postUrl(name) {
-	    return this.xhr("/url/" + encodeURIComponent(name), "POST");
-	  },
-	  xhr: function xhr(url, method) {
-	    console.log("sending XHR for : ", url);
-	    return new Promise(function (resolve, reject) {
-	      var req = new XMLHttpRequest();
-	      req.open(method, url, true);
-	      req.onreadystatechange = function (aEvt) {
-	        if (req.readyState == 4) {
-	          if (req.status == 200) {
-	            resolve(req.response);
-	          } else {
-	            reject(req.status);
-	          }
-	        }
-	      };
-	      req.send(null);
-	    });
-	  }
-	};
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(3);
-
-
-/***/ },
-/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20182,15 +20135,7 @@
 	    }
 	  }, {
 	    key: 'setFocus',
-	    value: function setFocus() {
-	      console.log("did mount : ", this.props);
-	      if (this.props.active) {
-	        console.log("set input focus");
-	        _reactDom2.default.findDOMNode(this.refs.input).focus();
-	      } else {
-	        _reactDom2.default.findDOMNode(this.refs.input).blur();
-	      }
-	    }
+	    value: function setFocus() {}
 	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
@@ -20225,6 +20170,53 @@
 	}(_react2.default.Component);
 	
 	exports.default = CustomUrl;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(3);
+
+
+/***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	module.exports = {
+	  getJSON: function getJSON(url) {
+	    return this.xhr(url, "GET").then(JSON.parse);
+	  },
+	  getIcon: function getIcon(path) {
+	    return this.xhr("/icon?path=" + path, "GET");
+	  },
+	  postApp: function postApp(name) {
+	    return this.xhr("/app/" + encodeURIComponent(name), "POST");
+	  },
+	  postUrl: function postUrl(name) {
+	    return this.xhr("/url/" + encodeURIComponent(name), "POST");
+	  },
+	  xhr: function xhr(url, method) {
+	    console.log("sending XHR for : ", url);
+	    return new Promise(function (resolve, reject) {
+	      var req = new XMLHttpRequest();
+	      req.open(method, url, true);
+	      req.onreadystatechange = function (aEvt) {
+	        if (req.readyState == 4) {
+	          if (req.status == 200) {
+	            resolve(req.response);
+	          } else {
+	            reject(req.status);
+	          }
+	        }
+	      };
+	      req.send(null);
+	    });
+	  }
+	};
 
 /***/ }
 /******/ ]);
