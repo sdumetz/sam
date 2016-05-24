@@ -1,6 +1,6 @@
 {
   "name": "sam",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "smart TV application manager",
   "main": "index.js",
   "config": {
