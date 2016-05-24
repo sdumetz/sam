@@ -47,7 +47,7 @@ Promise.all(init).then(function() {
   var size = electron.screen.getPrimaryDisplay().workAreaSize;
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: size.width, height: size.height,frame:false});
+  mainWindow = new BrowserWindow({width: size.width, height: size.height,frame:false,webPreferences: { plugins: true }});
 
   // and load the index.html of the app.
   mainWindow.loadURL('http://localhost:8000/');
