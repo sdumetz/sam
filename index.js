@@ -1,3 +1,4 @@
+const fs = require("fs");
 const electron = require('electron');
 const express = require("express");
 const app = electron.app;  // Module to control application life.
@@ -10,6 +11,17 @@ var mainWindow = null; // Keep a global reference of the window object
 var appsmanager = new AppsManager();
 var webserver = new WebServer(appsmanager.list());
 var init = [];
+
+// Load flash plugin if available
+try {
+  if(fs.statSync("/usr/lib/browser-plugin-freshplayer-pepperflash/libfreshwrapper-flashplayer.so").isFile()){
+    app.commandLine.appendSwitch('ppapi-flash-path', '/usr/lib/browser-plugin-freshplayer-pepperflash/libfreshwrapper-flashplayer.so');
+  }
+}catch(e){
+  //silently ignore flash player absence
+}
+
+
 init.push(webserver.listen(8000));
 init.push(new Promise(function(resolve, reject) {
   app.on('ready',resolve);
@@ -33,6 +45,7 @@ appsmanager.on("end",function(){
 
 Promise.all(init).then(function() {
   var size = electron.screen.getPrimaryDisplay().workAreaSize;
+
   // Create the browser window.
   mainWindow = new BrowserWindow({width: size.width, height: size.height,frame:false});
 
