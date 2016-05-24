@@ -14,8 +14,8 @@ var init = [];
 
 // Load flash plugin if available
 try {
-  if(fs.statSync("/usr/lib/browser-plugin-freshplayer-pepperflash/libfreshwrapper-flashplayer.so").isFile()){
-    app.commandLine.appendSwitch('ppapi-flash-path', '/usr/lib/browser-plugin-freshplayer-pepperflash/libfreshwrapper-flashplayer.so');
+  if(fs.statSync("/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so").isFile()){
+    app.commandLine.appendSwitch('ppapi-flash-path', '/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so');
   }
 }catch(e){
   //silently ignore flash player absence
